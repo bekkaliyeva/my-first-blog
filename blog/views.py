@@ -1,3 +1,17 @@
 from django.shortcuts import render
 
-# Create your views here.
+def post_list(request):
+    return render(request, 'blog/index.html', {}
+    	)
+def account(request):
+	return render(request, 'blog/account.html', {} )
+
+
+def wishlist(request):
+	return render(request, 'blog/wishlist.html', {} )
+
+def checkout(request):
+	return render(request, 'blog/checkout.html', {} )
+
+def cart(request):
+	return render(request, 'blog/cart.html', {} )
