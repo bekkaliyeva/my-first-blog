@@ -15,3 +15,6 @@ def checkout(request):
 
 def cart(request):
 	return render(request, 'blog/cart.html', {} )
+
+def wrapper(request):
+	return render(request, 'blog/wrapper.html', {} )

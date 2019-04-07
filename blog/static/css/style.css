@@ -3367,6 +3367,7 @@ img {
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget {
   display: block;
+  height: 100%;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget h3 {
   color: #fff;
