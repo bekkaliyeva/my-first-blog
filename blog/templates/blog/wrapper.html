@@ -4,17 +4,17 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Daily Shop | Home</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Cake | Главная</title>
+
     <!-- Font awesome -->
     <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
     <!-- Bootstrap -->
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">   
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
     <!-- SmartMenus jQuery Bootstrap Addon CSS -->
     <link href="{% static 'css/jquery.smartmenus.bootstrap.css' %}" rel="stylesheet">
     <!-- Product view slider -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.simpleLens.css' %}">    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.simpleLens.css' %}">
     <!-- slick slider -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
     <!-- price picker slider -->
@@ -26,263 +26,79 @@
     <link href="{% static 'css/sequence-theme.modern-slide-in.css' %}" rel="stylesheet" media="all">
 
     <!-- Main style sheet -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">    
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-    
 
-   
+
+
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      
+
 
   </head>
   <body> 
-   <!-- wpf loader Two -->
+   <!-- pre loader  -->
     <div id="wpf-loader-two">          
       <div class="wpf-loader-two-inner">
         <span>Loading</span>
       </div>
     </div> 
-    <!-- / wpf loader Two -->       
-  <!-- SCROLL TOP BUTTON -->
-    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
-  <!-- END SCROLL TOP BUTTON -->
+    <!-- / pre loader -->
 
-
-
-
-    <!-- start header bottom  -->
-    <div class="aa-header-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="aa-header-bottom-area">
-              <!-- logo  -->
-              <div class="aa-logo">
-                <!-- Text based logo -->
-                <a href="{% url 'index' %}">
-                
-                  
-                  </a>
-               
-              </div>
-             
-<!-- <a href="index.html"><img src="img/logo.png" alt="logo img"></a> -->
-            
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- / header bottom  -->
-  </header>
-  <!-- / header section -->
   <!-- menu -->
-  <section id="menu">
-    <div class="container">
-      <div class="menu-area">
-        <!-- Navbar -->
-        <div class="navbar navbar-light" role="navigation">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>          
-          </div>
-          <div class="navbar-collapse collapse">
-            <!-- Left nav -->
-            <ul class="nav navbar-nav">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="#">Men </a></li>
-                <li><a href="#">Women </a></li>
-                
-              <li><a href="#">Kids </a>
-               
-              </li>
-              <li><a href="#">Sports</a></li>
-             <li><a href="#">Digital </a></li>
-              
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>       
-    </div>
-  </section>
+   <section id="menu">
+       <div class="container">
+           <div class="menu-area">
+               <!-- Navbar -->
+               <div class="navbar navbar-light" role="navigation">
+                   <div class="navbar-header">
+                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                           <span class="sr-only">Toggle navigation</span>
+                           <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                       </button>
+                   </div>
+                   <div class="navbar-collapse collapse">
+                       <ul class="nav navbar-nav">
+                           <li><a href="{% url 'index' %}">Главная</a></li>
+
+                           <li><a href="{% url 'products' 'tort' 'chip'%}">Торты </a></li>
+                           <li><a href="{% url 'products' 'pirog' 'chip' %}">Пироги </a></li>
+                           <li><a href="{% url 'products' 'konfeta' 'chip' %}">Конфеты </a></li>
+                           <li><a href="{% url 'products' 'desert' 'chip' %}">Десерты </a></li>
+                           <li><a href="{% url 'products' 'domash' 'chip' %}">Домашние изделия </a></li>
+                           <li><a href="{% url 'cart'%}">Корзина </a></li>
+                           {% if not user.is_authenticated %}
+                               <li class="nav-item dropdown navigation-item">
+                                   <a href="#" data-toggle="dropdown">Аккаунт</a>
+                                   <div class="dropdown-menu"  aria-labelledby="navbarDropdown" >
+                                       <a href="{% url 'login' %}" style="color: black; ">Войти</a>
+                                       <div class="dropdown-divider" ></div>
+                                       <a href="{% url 'register' %}" style="color: black; ">Создать аккаунт</a>
+                                   </div>
+                               </li>
+
+                           {% else %}
+                               <li><a href="{% url 'logout' %} ">Выйти </a></li>
+                           {% endif %}
+                           {% if request.user.is_authenticated  and request.user.is_staff %}
+                               <li><a href="{% url 'login' %}">Admin </a></li>
+                           {% endif %}
+                       </ul>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
   
 {% block content %}
 {% endblock %}
 
-  <!-- Support section -->
-  <section id="aa-support">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-support-area">
-            <!-- single support -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="aa-support-single">
-                <span class="fa fa-truck"></span>
-                <h4>FREE SHIPPING</h4>
-                <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.</P>
-              </div>
-            </div>
-            <!-- single support -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="aa-support-single">
-                <span class="fa fa-clock-o"></span>
-                <h4>30 DAYS MONEY BACK</h4>
-                <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.</P>
-              </div>
-            </div>
-            <!-- single support -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="aa-support-single">
-                <span class="fa fa-phone"></span>
-                <h4>SUPPORT 24/7</h4>
-                <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.</P>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- / Support section -->
-  <!-- Testimonial -->
-  <section id="aa-testimonial">  
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-testimonial-area">
-            <ul class="aa-testimonial-slider">
-              <!-- single slide -->
-              <li>
-                <div class="aa-testimonial-single">
-                <img class="aa-testimonial-img" src="img/testimonial-img-2.jpg" alt="testimonial img">
-                  <span class="fa fa-quote-left aa-testimonial-quote"></span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui!consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui.</p>
-                  <div class="aa-testimonial-info">
-                    <p>Allison</p>
-                    <span>Designer</span>
-                    <a href="#">Dribble.com</a>
-                  </div>
-                </div>
-              </li>
-              <!-- single slide -->
-              <li>
-                <div class="aa-testimonial-single">
-                <img class="aa-testimonial-img" src="img/testimonial-img-1.jpg" alt="testimonial img">
-                  <span class="fa fa-quote-left aa-testimonial-quote"></span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui!consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui.</p>
-                  <div class="aa-testimonial-info">
-                    <p>KEVIN MEYER</p>
-                    <span>CEO</span>
-                    <a href="#">Alphabet</a>
-                  </div>
-                </div>
-              </li>
-               <!-- single slide -->
-              <li>
-                <div class="aa-testimonial-single">
-                <img class="aa-testimonial-img" src="img/testimonial-img-3.jpg" alt="testimonial img">
-                  <span class="fa fa-quote-left aa-testimonial-quote"></span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui!consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui.</p>
-                  <div class="aa-testimonial-info">
-                    <p>Luner</p>
-                    <span>COO</span>
-                    <a href="#">Kinatic Solution</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- / Testimonial -->
 
-
-  <!-- Subscribe section -->
-  <section id="aa-subscribe">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-subscribe-area">
-            <h3>Оставьте заявку </h3>
-            <p>Хотите заказать эксклюзивный торт по собственной задумке или эксклюзивное изделие из шоколада?
-Нет ничего проще. Опишите задумку или добавьте фото с примером.</p>
-            <form action="" class="aa-subscribe-form">
-              <input type="text" name="" id="" placeholder="Enter your name" style="display: block;">
-                <br>
-              <input type="text" name="" id="" placeholder="Enter your phone number" style="display: block;">
-              <br>
-              <textarea name="comment" placeholder="Ваша задумка" style="display: block;"></textarea>
-              <input type="submit" value="send" >
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- / Subscribe section -->
-
-  <!-- footer -->  
-  <footer id="aa-footer">
-    <!-- footer bottom -->
-    <div class="aa-footer-top">
-     <div class="container">
-        <div class="row">
-        <div class="col-md-12">
-          <div class="aa-footer-top-area">
-            <div class="row">
-              <div class="col-md-6 col-sm-6">
-                <div class="aa-footer-widget">
-                  <h3>Main Menu</h3>
-                  <ul class="aa-footer-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Our Services</a></li>
-                    <li><a href="#">Our Products</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="aa-footer-widget">
-                  <div class="aa-footer-widget">
-                    <h3>Contact Us</h3>
-                    <address>
-                      <p><span class="fa fa-location-arrow"></span>Казахстан, г.Павлодар ул. Абая, 115</p>
-                      <p><span class="fa fa-location-arrow"></span>Казахстан, г.Павлодар ул. Абая, 115</p>
-                      <p><span class="fa fa-location-arrow"></span>Казахстан, г.Павлодар ул. Абая, 115</p>
-                      <p><span class="fa fa-phone"></span> 8 (7182) 65-30-30</p>
-                      <p><span class="fa fa-whatsapp"></span>+77071151515</p>
-                      <p><span class="fa fa-instagram"></span>@my_cake_aktau</p>
-                      <p><span class="fa fa-instagram"></span>@my_cake_kz</p>
-                      <p><span class="fa fa-instagram"></span>@my_cake_almaty</p>
-                    </address>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-     </div>
-    </div>
-    <!-- footer-bottom -->
-    
-  </footer>
-  <!-- / footer -->
 
 
   <!-- jQuery library -->
